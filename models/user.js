@@ -3,10 +3,10 @@ const mysql = require('mysql');
 
 function createSchema() {
   const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '12345',
-    database: 'cft'
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE'
   });
 
   connection.connect((err) => {
@@ -18,7 +18,7 @@ function createSchema() {
   });
 
   const createUserTableQuery = `
-    CREATE TABLE IF NOT EXISTS cft (
+    CREATE TABLE IF NOT EXISTS ${process.env.MYSQL_DATABASE} (
       id INT AUTO_INCREMENT PRIMARY KEY,
       firstName VARCHAR(255) NOT NULL,
       lastName VARCHAR(255) NOT NULL,
